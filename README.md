@@ -27,12 +27,12 @@ You'll also need to obtain API keys for Etherscan and BSCscan, as well as a Tele
 2. Install the required packages: `pip install -r requirements.txt`
 3. Replace the following placeholders in the `main.py` file with your API keys and bot token:
 
-    ```python
+```
     ETHERSCAN_API_KEY = '<your_etherscan_api_key>'
     BSCSCAN_API_KEY = '<your_bscscan_api_key>'
     TELEGRAM_BOT_TOKEN = '<your_telegram_bot_token>'
     TELEGRAM_CHAT_ID = '<your_telegram_chat_id>'
-    ```
+```
 4. Start the bot: `python main.py`
 
 ## Telegram chat ID
@@ -82,6 +82,23 @@ curl -X POST "https://api.telegram.org/botXXX:YYYY/sendMessage" -d "chat_id=-zzz
 
 If you miss step 2, there would be no update for the group you are looking for. Also if there are multiple groups, you can look for the group name in the response ("title":"group_name").
 
+## Docker
+### Build
+
+```
+docker build -t skywirex/mwallet .
+```
+
+### Run
+```
+docker run -d --name mwallet \
+  -e "TELEGRAM_BOT_TOKEN=1058413446:AAEj0N0AuvXbu-Kd0egdRS_MC33xxxxxxxx" \
+  -e "TELEGRAM_CHAT_ID=-1000000000000" \
+  -e "ETHERSCAN_API_KEY=XXXXXJDGFDTCVBY1B4YX4Z8GN45CJXXXXX" \
+  -e "BSCSCAN_API_KEY=XXXXXX8QDPZA6BEJU596P6XD5G26TXXXXX" \
+  --restart=unless-stopped \
+ skywirex/mwallet
+```
 
 ## Reference
 
