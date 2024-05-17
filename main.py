@@ -45,7 +45,7 @@ def send_telegram_notification(message, value, usd_value, tx_hash, blockchain):
 
     url = f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage'
     payload = {'chat_id': f'{TELEGRAM_CHAT_ID}',
-               'text': f'{message}: {etherscan_link}\nValue: {value:.6f} {blockchain.upper()} (${usd_value:.2f})',
+               'text': f'{message} ║ {etherscan_link}\nValue: {value:.6f} {blockchain.upper()} (${usd_value:.2f})',
                'parse_mode': 'HTML'}
     response = requests.post(url, data=payload)
     print(

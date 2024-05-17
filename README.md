@@ -1,24 +1,4 @@
-<h1 align="center">
-Crypto Wallet Transactions Tracker Bot
-</h1>
-
-</p>
-<p align="center">
-    <img src="https://img.shields.io/github/stars/cankatx/crypto-wallet-tracker">
-    <img src="https://img.shields.io/github/forks/cankatx/crypto-wallet-tracker"> 
-    <br>
-    <img src="https://img.shields.io/github/languages/top/cankatx/crypto-wallet-tracker">
-    <img src="https://img.shields.io/github/last-commit/cankatx/crypto-wallet-tracker">
-    <br>
-    <img src="https://img.shields.io/github/issues/cankatx/crypto-wallet-tracker">
-    <img src="https://img.shields.io/github/issues-closed/cankatx/crypto-wallet-tracker">
-    <br>
-</p>
-
 This is a Telegram bot that tracks the transactions of added Ethereum (ETH) and Binance Coin (BNB) wallets and sends notifications whenever a new transaction occurs. The bot uses the Etherscan and BSCscan APIs to gather information about transactions, and CoinGecko to fetch the current prices of ETH and BNB.
-
-You can contact me for any inquiry; <br>
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/cankat) (THIS IS NOT A BOT)
 
 ## Commands
 
@@ -55,12 +35,57 @@ You'll also need to obtain API keys for Etherscan and BSCscan, as well as a Tele
     ```
 4. Start the bot: `python main.py`
 
-## Screenshots
+## Telegram chat ID
 
-  <img src="images/image3.png" width="505" height="395" />
-  <img src="images/image2.png" width="509" height="380" />
-  <img src="images/image1.png" width="470" height="175" />
-</p>
+#### Find your ChatID with bot
+
+To get your ChatID go into Telegram and send a chat message to your newly created bot (it will not respond). Once you have initiated a chat with your bot, then enter the following URL into your browser:
+
+```
+https://api.telegram.org/bot{BOTTOKEN_FROM_BOTFATHER}/getUpdates
+```
+
+The above URL should produce JSON output for your bot, including the ChatID. Paste your ChatID into your config.toml file.
+
+An example of the JSON output is as follows:
+
+```
+
+{"ok":true,"result":[{"update_id":111111111,
+"message":{"message_id":4,"from":{"id":222222222,"is_bot":false,"first_name":"TestUser","last_name":"","username":"TestUSer","language_code":"en-US"},"chat":{"id":000000000,"first_name":"TestUser","last_name":"","username":"TestUser","type":"private"},"date":1533900000,"text":"Hello"}}]}
+```
+
+In the example above, "chat":{"id":000000000 is what you are looking for, and specifically the id which in this example is 000000000.
+
+#### Group chat ID
+
+Assume the bot name is my_bot.
+
+1- Add the bot to the group.
+Go to the group, click on group name, click on Add members, in the searchbox search for your bot like this: @my_bot, select your bot and click add.
+
+2- Send a dummy message to the bot.
+You can use this example: /my_id @my_bot
+(I tried a few messages, not all the messages work. The example above works fine. Maybe the message should start with /)
+
+3- Go to following url: https://api.telegram.org/botXXX:YYYY/getUpdates
+replace XXX:YYYY with your bot token
+
+4- Look for "chat":{"id":-zzzzzzzzzz,
+-zzzzzzzzzz is your chat id (with the negative sign).
+
+5- Testing: You can test sending a message to the group with a curl:
+
+```
+curl -X POST "https://api.telegram.org/botXXX:YYYY/sendMessage" -d "chat_id=-zzzzzzzzzz&text=my sample text"
+```
+
+If you miss step 2, there would be no update for the group you are looking for. Also if there are multiple groups, you can look for the group name in the response ("title":"group_name").
+
+
+## Reference
+
+Group chat ID: https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id
 
 ## Disclaimer
 
